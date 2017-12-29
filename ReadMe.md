@@ -38,5 +38,6 @@ Create a yml file that looks like this in the root of your project:
 
 ```
 site:
-  grunt_path:
+  grunt_path: # Leave blank if no grunt.
+  root_path: # Leave blank if same as project path.
 ```

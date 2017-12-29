@@ -13,12 +13,12 @@ class BaseDrupalD7 extends BaseDrupal {
    * Perform setup tasks.
    */
   public function setup() {
-    if (!file_exists('www/.htaccess') || !file_exists('www/sites/default/local.settings.php')) {
+    if (!file_exists($this->getSiteRoot() . '.htaccess') || !file_exists($this->getSiteRoot() . 'sites/default/local.settings.php')) {
       $this->say("Missing .htaccess or local.setting.php");
       $name = $this->confirm("Missing .htaccess or local.setting.php Copy the default?");
       if ($name) {
-        $this->_exec('cp www/.htaccess.default www/.htaccess');
-        $this->_exec('cp www/sites/default/default.local.settings.php www/sites/default/local.settings.php');
+        $this->_exec('cp ' . $this->getSiteRoot() . '.htaccess.default ' . $this->getSiteRoot() . '.htaccess');
+        $this->_exec('cp ' . $this->getSiteRoot() . 'sites/default/default.local.settings.php ' . $this->$this->getSiteRoot() . 'sites/default/local.settings.php');
         $this->siteInit = TRUE;
         $this->start();
       }

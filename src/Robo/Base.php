@@ -28,4 +28,19 @@ abstract class Base extends \Robo\Tasks {
   public function getGruntPath() {
     return $this->config('site.grunt_path');
   }
+
+  /**
+   * Get site root path.
+   */
+  public function getSiteRoot() {
+    $path = $this->config('site.root_path');
+
+    // If path make sure it has trailing slash.
+    if ($path) {
+      // Remove and add a slash at the end.
+      $path = rtrim($path, '/') . '/';
+    }
+
+    return $path;
+  }
 }
