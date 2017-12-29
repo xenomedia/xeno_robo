@@ -9,6 +9,9 @@ use XenoMedia\XenoRobo\Robo\Drupal\BaseDrupal;
  */
 class BaseDrupalD7 extends BaseDrupal {
 
+  /**
+   * Perform setup tasks.
+   */
   public function setup() {
     if (!file_exists('www/.htaccess') || !file_exists('www/sites/default/local.settings.php')) {
       $this->say("Missing .htaccess or local.setting.php");
