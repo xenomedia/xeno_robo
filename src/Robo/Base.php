@@ -18,7 +18,14 @@ abstract class Base extends \Robo\Tasks {
    */
   public function start() {
     if ($this->siteInit) {
-      $this->_exec('/usr/bin/osascript DockerStart.scpt ' . $this->config('site.grunt_path'));
+      $this->_exec('/usr/bin/osascript DockerStart.scpt ' . $this->getGruntPath());
     }
+  }
+
+  /**
+   * Get grunt path set in config file.
+   */
+  public function getGruntPath() {
+    return $this->config('site.grunt_path');
   }
 }
