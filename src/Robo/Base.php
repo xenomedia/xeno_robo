@@ -30,6 +30,14 @@ abstract class Base extends Tasks {
   }
 
   /**
+   * Halt containers and cleanup network.
+   */
+  public function halt() {
+    $this->_exec('docker-compose stop');
+    $this->_exec('docker-sync stop');
+  }
+
+  /**
    * Get grunt path set in config file.
    */
   public function getGruntPath() {
