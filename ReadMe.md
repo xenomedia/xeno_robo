@@ -28,6 +28,18 @@ class RoboFile extends BaseDrupalD7 {
 }
 ```
 
+Example Drupal 8 RoboFile.php:
+
+```
+<?php
+
+use XenoMedia\XenoRobo\Robo\Drupal\BaseDrupalD8;
+
+class RoboFile extends BaseDrupalD8 {
+
+}
+```
+
 Example Wordpress Robo File:
 
 ```
