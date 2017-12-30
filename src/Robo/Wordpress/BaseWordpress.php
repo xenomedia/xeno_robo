@@ -23,7 +23,15 @@ abstract class BaseWordpress extends Base {
    * Perform set up tasks.
    */
   public function setup() {
-    $this->_exec('cp www/default.wp-config.php www/wp-config.php');
+    if (!file_exists($this->getSiteRoot() . 'wp-config.php') {
+      $this->_exec('cp ' . $this->getSiteRoot() . 'default.wp-config.php ' . $this->getSiteRoot() . 'wp-config.php');
+      $this->npmInstall();
+      $this->siteInit = TRUE;
+      $this->start();
+    }
+    else {
+      $this->siteInit = TRUE;
+    }
   }
 
 }
