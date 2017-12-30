@@ -13,10 +13,10 @@ composer global require xenomedia/xeno_robo
 
 ### Create Robo File
 
-In the root of your project create `Robo.php` file. Extend the class based on
+In the root of your project create `RoboFile.php` file. Extend the class based on
 the project you are working on.
 
-Example Drupal 7 Robo file:
+Example Drupal 7 RoboFile.php:
 
 ```
 <?php
