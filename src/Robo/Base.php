@@ -66,4 +66,17 @@ abstract class Base extends Tasks {
     return $string;
   }
 
+  /**
+   * Run npm install on your grunt path.
+   *
+   * @return $this
+   */
+  public function npmInstall() {
+    if ($this->getGruntPath()) {
+      return $this->taskNpmInstall()
+        ->dir($this->getGruntPath())
+        ->run();
+    }
+  }
+
 }
