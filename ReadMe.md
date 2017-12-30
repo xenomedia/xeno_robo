@@ -1,7 +1,15 @@
 # Xeno Robo
-Robo commands for developing at Xeno Media.
+Robo commands for developing websites at Xeno Media.
 
 ## Getting Started
+
+### Installation
+
+Install with Composer by running:
+
+```
+composer global require xenomedia/xeno_robo
+```
 
 ### Create Robo File
 
