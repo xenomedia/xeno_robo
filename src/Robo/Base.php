@@ -44,11 +44,26 @@ abstract class Base extends Tasks {
 
     // If path make sure it has trailing slash.
     if ($path) {
-      // Remove and add a slash at the end.
-      $path = rtrim($path, '/') . '/';
+      $path = $this->endWithTrailingSlash($path);
     }
 
     return $path;
+  }
+
+  /**
+   * End string with trailing slash.
+   *
+   * @param string $string
+   *   String to update.
+   *
+   * @return string
+   *   Updated string ending with trailing slash.
+   */
+  private function endWithTrailingSlash($string) {
+    // Remove and add a slash at the end.
+    $string = rtrim($string, '/') . '/';
+
+    return $string;
   }
 
 }
