@@ -1,5 +1,5 @@
 {
-    "name": "xenomedia/xeno-robo",
+    "name": "xenomedia/xeno_robo",
     "description": "Robo tasks used at Xeno Media",
     "license": "MIT",
     "type": "robo-tasks",
