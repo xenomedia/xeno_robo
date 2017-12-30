@@ -19,7 +19,11 @@ abstract class BaseWordpress extends Base {
     parent::start();
   }
 
+  /**
+   * Perform set up tasks.
+   */
   public function setup() {
     $this->_exec('cp www/default.wp-config.php www/wp-config.php');
   }
+
 }

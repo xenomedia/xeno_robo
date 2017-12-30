@@ -2,13 +2,20 @@
 
 namespace XenoMedia\XenoRobo\Robo;
 
+use Robo\Tasks as Tasks;
+
 /**
  * Base class for Xeno robo commands.
  */
-abstract class Base extends \Robo\Tasks {
+abstract class Base extends Tasks {
   // Used to read robo.yml.dist file.
   use \NuvoleWeb\Robo\Task\Config\loadTasks;
 
+  /**
+   * Set to TRUE if site has been inited.
+   *
+   * @var bool
+   */
   public $siteInit = FALSE;
 
   /**
@@ -43,4 +50,5 @@ abstract class Base extends \Robo\Tasks {
 
     return $path;
   }
+
 }

@@ -2,15 +2,13 @@
 
 namespace XenoMedia\XenoRobo\Robo\Drupal;
 
-use XenoMedia\XenoRobo\Robo\Drupal\BaseDrupal;
-
 /**
  * Base class for Drupal D7 sites.
  */
 class BaseDrupalD7 extends BaseDrupal {
 
   /**
-   * Perform setup tasks.
+   * {@inheritdoc}
    */
   public function setup() {
     if (!file_exists($this->getSiteRoot() . '.htaccess') || !file_exists($this->getSiteRoot() . 'sites/default/local.settings.php')) {
@@ -27,4 +25,5 @@ class BaseDrupalD7 extends BaseDrupal {
       $this->siteInit = TRUE;
     }
   }
+
 }
