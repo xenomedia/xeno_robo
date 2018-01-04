@@ -30,6 +30,28 @@ abstract class Base extends Tasks {
   }
 
   /**
+   * Pull live database from last nights backup.
+   *
+   * @command get-db
+   */
+  public function getDb() {
+    // If mariadb-init directory doesn't exist create it.
+    $this->_exec('mkdir -p mariadb-init');
+
+    // Remove the dump file if it exists.
+    $this->taskFilesystemStack()
+      ->remove('mariadb-init/dump.sql');
+
+    // If it has Pantheon info get Pantheon dump.
+    if ($pantheon = $this->getPantheonInfo()) {
+      // Get database from Pantheon.
+      $this->_exec('terminus backup:create ' . $pantheon['site_name'] . '.' . $pantheon['env'] . ' --element=db');
+      $this->_exec('terminus backup:get ' . $pantheon['site_name'] . '.' . $pantheon['env'] . ' --element=db --to=mariadb-init/dump.sql.gz');
+      $this->_exec('gunzip mariadb-init/dump.sql.gz');
+    }
+  }
+
+  /**
    * Halt containers and cleanup network.
    */
   public function halt() {
@@ -56,6 +78,13 @@ abstract class Base extends Tasks {
     }
 
     return $path;
+  }
+
+  /**
+   * Get Patheon info.
+   */
+  public function getPantheonInfo() {
+    return $this->config('pantheon');
   }
 
   /**
