@@ -60,4 +60,8 @@ Create a yml file that looks like this in the root of your project:
 site:
   grunt_path: # Leave blank if no grunt.
   root_path: # Leave blank if same as project path.
+# Only if the site is hosted on pantheon.
+pantheon:
+  site_name:
+  env:
 ```
