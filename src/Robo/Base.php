@@ -11,6 +11,8 @@ abstract class Base extends Tasks {
   // Used to read robo.yml.dist file.
   use \NuvoleWeb\Robo\Task\Config\loadTasks;
 
+  const DUMP_FILE = 'dump.sql';
+
   /**
    * Set to TRUE if site has been inited.
    *
@@ -30,6 +32,29 @@ abstract class Base extends Tasks {
   }
 
   /**
+   * Backup Database and stop containers.
+   */
+  public function stop() {
+    $this->backupDb();
+    $this->halt();
+  }
+
+  /**
+   * Backup database from docker site.
+   */
+  public function backupDb() {
+    $this->_exec('docker-compose exec --user=82 mariadb /usr/bin/mysqldump -u drupal --password=drupal drupal > mariadb-init/' . self::DUMP_FILE);
+  }
+
+  /**
+   * Halt containers and cleanup network.
+   */
+  public function halt() {
+    $this->_exec('docker-compose stop');
+    $this->_exec('docker-sync stop');
+  }
+
+  /**
    * Pull live database from last nights backup.
    *
    * @command get-db
@@ -40,23 +65,15 @@ abstract class Base extends Tasks {
 
     // Remove the dump file if it exists.
     $this->taskFilesystemStack()
-      ->remove('mariadb-init/dump.sql');
+      ->remove('mariadb-init/' . self::DUMP_FILE);
 
     // If it has Pantheon info get Pantheon dump.
     if ($pantheon = $this->getPantheonInfo()) {
       // Get database from Pantheon.
       $this->_exec('terminus backup:create ' . $pantheon['site_name'] . '.' . $pantheon['env'] . ' --element=db');
       $this->_exec('terminus backup:get ' . $pantheon['site_name'] . '.' . $pantheon['env'] . ' --element=db --to=mariadb-init/dump.sql.gz');
-      $this->_exec('gunzip mariadb-init/dump.sql.gz');
+      $this->_exec('gunzip mariadb-init/' . self::DUMP_FILE . '.gz');
     }
-  }
-
-  /**
-   * Halt containers and cleanup network.
-   */
-  public function halt() {
-    $this->_exec('docker-compose stop');
-    $this->_exec('docker-sync stop');
   }
 
   /**
@@ -88,7 +105,7 @@ abstract class Base extends Tasks {
     }
   }
 
-    /**
+  /**
    * Get grunt path set in config file.
    */
   public function getGruntPath() {
