@@ -60,34 +60,6 @@ abstract class Base extends Tasks {
   }
 
   /**
-   * Get grunt path set in config file.
-   */
-  public function getGruntPath() {
-    return $this->config('site.grunt_path');
-  }
-
-  /**
-   * Get site root path.
-   */
-  public function getSiteRoot() {
-    $path = $this->config('site.root_path');
-
-    // If path make sure it has trailing slash.
-    if ($path) {
-      $path = $this->endWithTrailingSlash($path);
-    }
-
-    return $path;
-  }
-
-  /**
-   * Get Patheon info.
-   */
-  public function getPantheonInfo() {
-    return $this->config('pantheon');
-  }
-
-  /**
    * End string with trailing slash.
    *
    * @param string $string
@@ -114,6 +86,34 @@ abstract class Base extends Tasks {
         ->dir($this->getGruntPath())
         ->run();
     }
+  }
+
+    /**
+   * Get grunt path set in config file.
+   */
+  public function getGruntPath() {
+    return $this->config('site.grunt_path');
+  }
+
+  /**
+   * Get site root path.
+   */
+  public function getSiteRoot() {
+    $path = $this->config('site.root_path');
+
+    // If path make sure it has trailing slash.
+    if ($path) {
+      $path = $this->endWithTrailingSlash($path);
+    }
+
+    return $path;
+  }
+
+  /**
+   * Get Patheon info.
+   */
+  public function getPantheonInfo() {
+    return $this->config('pantheon');
   }
 
 }
