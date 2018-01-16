@@ -64,4 +64,10 @@ site:
 pantheon:
   site_name:
   env:
+# Only if the site is on our staging server.
+stage:
+  site_name: # Usually will be the folder name which the site is on staging.
+  user: # Staging user.
+  host: # Staging host.
+  backup_location: # backup location.
 ```

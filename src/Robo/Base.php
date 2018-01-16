@@ -74,6 +74,11 @@ abstract class Base extends Tasks {
       $this->_exec('terminus backup:get ' . $pantheon['site_name'] . '.' . $pantheon['env'] . ' --element=db --to=mariadb-init/dump.sql.gz');
       $this->_exec('gunzip mariadb-init/' . self::DUMP_FILE . '.gz');
     }
+    // If it has Stage info get database dump from staging.
+    elseif ($stage = $this->getStageInfo()) {
+      $this->_exec("scp {$stage['user']}@{$stage['host']}:{$stage['backup_location']}/{$stage['site_name']}.sql.gz mariadb-init/" . self::DUMP_FILE . ".gz");
+      $this->_exec('gunzip mariadb-init/' . self::DUMP_FILE . '.gz');
+    }
   }
 
   /**
@@ -131,6 +136,13 @@ abstract class Base extends Tasks {
    */
   public function getPantheonInfo() {
     return $this->config('pantheon');
+  }
+
+  /**
+   * Get Stage info.
+   */
+  public function getStageInfo() {
+    return $this->config('stage');
   }
 
 }
