@@ -21,7 +21,7 @@ class BaseDrupalD8 extends BaseDrupal {
           $this->_exec('cp ' . $this->getSiteRoot() . '.htaccess.default ' . $this->getSiteRoot() . '.htaccess');
         }
 
-        $this->_exec('cp ' . $this->getSiteRoot() . 'sites/default/example.settings.local.php ' . $this->getSiteRoot() . 'sites/default/settings.local.php');
+        $this->_exec('cp ' . $this->getSiteRoot() . 'sites/example.settings.local.php ' . $this->getSiteRoot() . 'sites/default/settings.local.php');
         $this->npmInstall();
         $this->getDb();
         $this->siteInit = TRUE;
