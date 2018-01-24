@@ -121,6 +121,16 @@ abstract class Base extends Tasks {
   }
 
   /**
+   * Remove docker containers and volumes.
+   */
+  public function dockerClean() {
+    $name = $this->confirm("This will remove all containers and volumes. Are you sure?");
+    if ($name) {
+      $this->_exec('docker-sync-stack clean');
+    }
+  }
+
+  /**
    * Get grunt path set in config file.
    */
   public function getGruntPath() {
