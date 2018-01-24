@@ -112,6 +112,15 @@ abstract class Base extends Tasks {
   }
 
   /**
+   * Runs composer install.
+   *
+   * @return $this
+   */
+  public function composerInstall() {
+    $this->taskComposerInstall()->run();
+  }
+
+  /**
    * Get grunt path set in config file.
    */
   public function getGruntPath() {
