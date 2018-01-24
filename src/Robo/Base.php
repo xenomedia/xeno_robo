@@ -131,6 +131,26 @@ abstract class Base extends Tasks {
   }
 
   /**
+   * Merge Master with current branch.
+   *
+   * @return mixed
+   *   Value of the collection.
+   */
+  public function gitMaster() {
+    $current_branch = exec('git rev-parse --abbrev-ref HEAD');
+
+    $collection = $this->collectionBuilder();
+    $collection->taskGitStack()
+      ->checkout('master')
+      ->pull('origin', 'master')
+      ->checkout($current_branch)
+      ->merge('master')
+      ->completion($this->taskGitStack()->push('origin', $current_branch));
+
+    return $collection;
+  }
+
+  /**
    * Publish current branch to master.
    *
    * @return mixed
