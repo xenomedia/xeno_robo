@@ -72,7 +72,7 @@ abstract class Base extends Tasks {
     if ($pantheon = $this->getPantheonInfo()) {
       // Get database from Pantheon.
       $this->_exec('terminus backup:create ' . $pantheon['site_name'] . '.' . $pantheon['env'] . ' --element=db');
-      $this->_exec('terminus backup:get ' . $pantheon['site_name'] . '.' . $pantheon['env'] . ' --element=db --to=mariadb-init/' . self::DUMP_FILE  . '.gz');
+      $this->_exec('terminus backup:get ' . $pantheon['site_name'] . '.' . $pantheon['env'] . ' --element=db --to=mariadb-init/' . self::DUMP_FILE . '.gz');
       $this->_exec('gunzip mariadb-init/' . self::DUMP_FILE . '.gz');
     }
     // If it has Stage info get database dump from staging.
@@ -117,7 +117,7 @@ abstract class Base extends Tasks {
    * @return $this
    */
   public function composerInstall() {
-    $this->taskComposerInstall()->run();
+    return $this->taskComposerInstall()->run();
   }
 
   /**
