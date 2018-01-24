@@ -131,6 +131,25 @@ abstract class Base extends Tasks {
   }
 
   /**
+   * Publish current branch to master.
+   *
+   * @return mixed
+   *   Value of the collection.
+   */
+  public function gitPublish() {
+    $current_branch = exec('git rev-parse --abbrev-ref HEAD');
+
+    $collection = $this->collectionBuilder();
+    $collection->taskGitStack()
+      ->checkout('master')
+      ->merge($current_branch)
+      ->completion($this->taskGitStack()->push('origin', 'master'))
+      ->completion($this->taskGitStack()->checkout($current_branch));
+
+    return $collection;
+  }
+
+  /**
    * Get grunt path set in config file.
    */
   public function getGruntPath() {
