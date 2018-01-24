@@ -29,6 +29,8 @@ use XenoMedia\XenoRobo\Robo\Drupal\BaseDrupalD7;
 class RoboFile extends BaseDrupalD7 {
 
 }
+
+?>
 ```
 
 Example Drupal 8 RoboFile.php:
@@ -44,6 +46,8 @@ use XenoMedia\XenoRobo\Robo\Drupal\BaseDrupalD8;
 class RoboFile extends BaseDrupalD8 {
 
 }
+
+?>
 ```
 
 Example Wordpress Robo File:
@@ -59,6 +63,8 @@ use XenoMedia\XenoRobo\Robo\Wordpress\BaseWordpress;
 class RoboFile extends BaseWordpress {
 
 }
+
+?>
 ```
 
 ### Create robo.yml.dist file
