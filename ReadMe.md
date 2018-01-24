@@ -13,8 +13,8 @@ composer global require xenomedia/xeno_robo
 
 ### Create Robo File
 
-In the root of your project create `RoboFile.php` file. Extend the class based on
-the project you are working on.
+In the root of your project create `RoboFile.php` file. Extend the class based
+on the project you are working on.
 
 Example Drupal 7 RoboFile.php:
 
@@ -23,6 +23,9 @@ Example Drupal 7 RoboFile.php:
 
 use XenoMedia\XenoRobo\Robo\Drupal\BaseDrupalD7;
 
+/**
+ * Provides Drupal 7 robo commands.
+ */
 class RoboFile extends BaseDrupalD7 {
 
 }
@@ -35,6 +38,9 @@ Example Drupal 8 RoboFile.php:
 
 use XenoMedia\XenoRobo\Robo\Drupal\BaseDrupalD8;
 
+/**
+ * Provides Drupal 8 robo commands.
+ */
 class RoboFile extends BaseDrupalD8 {
 
 }
@@ -47,6 +53,9 @@ Example Wordpress Robo File:
 
 use XenoMedia\XenoRobo\Robo\Wordpress\BaseWordpress;
 
+/**
+ * Provides Wordpress robo commands.
+ */
 class RoboFile extends BaseWordpress {
 
 }
