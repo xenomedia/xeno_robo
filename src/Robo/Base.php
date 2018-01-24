@@ -131,6 +131,13 @@ abstract class Base extends Tasks {
   }
 
   /**
+   * Access php on docker.
+   */
+  public function shellPhp() {
+    $this->_exec('docker-compose exec --user=82 php sh');
+  }
+
+  /**
    * Cherry pick current branch to master.
    *
    * @return mixed
