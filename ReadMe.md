@@ -69,5 +69,5 @@ stage:
   site_name: # Usually will be the folder name which the site is on staging.
   user: # Staging user.
   host: # Staging host.
-  backup_location: # backup location.
+  backup_location: # Path to directory where backups are stored.
 ```
