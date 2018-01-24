@@ -64,14 +64,15 @@ abstract class Base extends Tasks {
     $this->_exec('mkdir -p mariadb-init');
 
     // Remove the dump file if it exists.
-    $this->taskFilesystemStack()
-      ->remove('mariadb-init/' . self::DUMP_FILE);
+    if (file_exists('mariadb-init/' . self::DUMP_FILE) || file_exists('mariadb-init/' . self::DUMP_FILE . '.gz')) {
+      $this->_exec('rm mariadb-init/*');
+    }
 
     // If it has Pantheon info get Pantheon dump.
     if ($pantheon = $this->getPantheonInfo()) {
       // Get database from Pantheon.
       $this->_exec('terminus backup:create ' . $pantheon['site_name'] . '.' . $pantheon['env'] . ' --element=db');
-      $this->_exec('terminus backup:get ' . $pantheon['site_name'] . '.' . $pantheon['env'] . ' --element=db --to=mariadb-init/dump.sql.gz');
+      $this->_exec('terminus backup:get ' . $pantheon['site_name'] . '.' . $pantheon['env'] . ' --element=db --to=mariadb-init/' . self::DUMP_FILE  . '.gz');
       $this->_exec('gunzip mariadb-init/' . self::DUMP_FILE . '.gz');
     }
     // If it has Stage info get database dump from staging.
