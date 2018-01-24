@@ -131,6 +131,25 @@ abstract class Base extends Tasks {
   }
 
   /**
+   * Cherry pick current branch to master.
+   *
+   * @return mixed
+   *   Value of the collection.
+   */
+  public function gitCp() {
+    $current_branch = exec('git rev-parse --abbrev-ref HEAD');
+
+    $collection = $this->collectionBuilder();
+    $collection->taskGitStack()
+      ->checkout('master')
+      ->exec('git cherry-pick ' . $current_branch)
+      ->completion($this->taskGitStack()->push('origin', 'master'))
+      ->completion($this->taskGitStack()->checkout($current_branch));
+
+    return $collection;
+  }
+
+  /**
    * Merge Master with current branch.
    *
    * @return mixed
