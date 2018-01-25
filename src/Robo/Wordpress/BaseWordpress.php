@@ -20,6 +20,13 @@ abstract class BaseWordpress extends Base {
   }
 
   /**
+   * Backup database from docker site.
+   */
+  public function dbBackup() {
+    $this->_exec('docker-compose exec --user=82 mariadb /usr/bin/mysqldump -u wordpress --password=wordpress wordpress > mariadb-init/' . self::DUMP_FILE);
+  }
+
+  /**
    * Perform set up tasks.
    */
   public function setup() {
