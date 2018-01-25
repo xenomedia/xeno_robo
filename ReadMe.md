@@ -85,6 +85,10 @@ site:
   root_path: # Leave blank if same as project path.
   live_domain: # Used for WP Search and replace
   local_domain: # Used for WP Search and replace
+database:
+  database:
+  user:
+  password:
 # `robo db:get` settings
 # Pull the DB from Pantheon.
 pantheon:

@@ -52,7 +52,8 @@ abstract class Base extends Tasks {
    * Backup database from docker site.
    */
   public function dbBackup() {
-    $this->_exec('docker-compose exec --user=82 mariadb /usr/bin/mysqldump -u drupal --password=drupal drupal > mariadb-init/' . self::DUMP_FILE);
+    $db = $this->getDatabaseInfo();
+    $this->_exec("docker-compose exec --user=82 mariadb /usr/bin/mysqldump -u {$db['user']} --password={$db['password']} {$db['database']} > mariadb-init/" . self::DUMP_FILE);
   }
 
   /**
@@ -237,6 +238,13 @@ abstract class Base extends Tasks {
     }
 
     return $path;
+  }
+
+  /**
+   * Get Database info.
+   */
+  public function getDatabaseInfo() {
+    return $this->config('database');
   }
 
   /**
