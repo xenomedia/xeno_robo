@@ -144,7 +144,6 @@ abstract class Base extends Tasks {
       ->args(['exec', '--user=82', 'php', './vendor/bin/behat'])
       ->option('colors')
       ->option('format', 'progress')
-      ->args('features/cart.feature')
       ->run();
   }
 
