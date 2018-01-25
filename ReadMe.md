@@ -7,8 +7,16 @@ Robo commands for developing websites at Xeno Media.
 
 Install with Composer by running:
 
-```
+```bash
 composer global require xenomedia/xeno_robo
+```
+
+or
+
+```bash
+composer global require consolidation/cgr
+composer global remove consolidation/robo
+cgr xenomedia/xeno_robo
 ```
 
 ### Create Robo File
@@ -18,7 +26,7 @@ on the project you are working on.
 
 Example Drupal 7 RoboFile.php:
 
-```
+```php
 <?php
 
 use XenoMedia\XenoRobo\Robo\Drupal\BaseDrupalD7;
@@ -35,7 +43,7 @@ class RoboFile extends BaseDrupalD7 {
 
 Example Drupal 8 RoboFile.php:
 
-```
+```php
 <?php
 
 use XenoMedia\XenoRobo\Robo\Drupal\BaseDrupalD8;
@@ -52,7 +60,7 @@ class RoboFile extends BaseDrupalD8 {
 
 Example Wordpress Robo File:
 
-```
+```php
 <?php
 
 use XenoMedia\XenoRobo\Robo\Wordpress\BaseWordpress;
@@ -71,18 +79,21 @@ class RoboFile extends BaseWordpress {
 
 Create a yml file that looks like this in the root of your project:
 
-```
+```yaml
 site:
   grunt_path: # Leave blank if no grunt.
   root_path: # Leave blank if same as project path.
-# Only if the site is hosted on pantheon.
+  live_domain: # Used for WP Search and replace
+  local_domain: # Used for WP Search and replace
+# `robo db:get` settings
+# Pull the DB from Pantheon.
 pantheon:
-  site_name:
+  site_name: 
   env:
-# Only if the site is on our staging server.
+# Pull the DB from SSH.
 stage:
-  site_name: # Usually will be the folder name which the site is on staging.
-  user: # Staging user.
-  host: # Staging host.
+  site_name: # The name of the *sql.gz file to get. If the file name is `example.sql.gz` then enter `example` 
+  user: # Staging ssh user.
+  host: # Staging ssh host.
   backup_location: # Path to directory where backups are stored.
 ```
