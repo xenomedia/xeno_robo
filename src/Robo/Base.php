@@ -57,8 +57,6 @@ abstract class Base extends Tasks {
 
   /**
    * Pull live database from last nights backup.
-   *
-   * @command get-db
    */
   public function dbGet() {
     // If mariadb-init directory doesn't exist create it.
