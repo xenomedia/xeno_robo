@@ -258,10 +258,7 @@ abstract class Base extends Tasks {
    * Get Current Directory.
    */
   public function getDirectory() {
-    $stack = debug_backtrace();
-    $firstFrame = $stack[count($stack) - 1];
-    $initialFile = $firstFrame['file'];
-    return $initialFile;
+    return __DIR__;
   }
 
   /**
