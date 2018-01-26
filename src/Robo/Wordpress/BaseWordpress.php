@@ -25,6 +25,7 @@ abstract class BaseWordpress extends Base {
   public function setup() {
     if (!file_exists($this->getSiteRoot() . 'wp-config.php')) {
       $this->_exec('cp ' . $this->getSiteRoot() . 'default.wp-config.php ' . $this->getSiteRoot() . 'wp-config.php');
+      $this->_exec('cp ' . $this->getSiteRoot() . '.htaccess.default ' . $this->getSiteRoot() . '.htaccess');
       $this->npmInstall();
       $this->dbGet();
       $this->siteInit = TRUE;
