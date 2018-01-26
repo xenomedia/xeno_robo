@@ -139,7 +139,7 @@ abstract class Base extends Tasks {
    * Access php on docker.
    */
   public function shellPwd() {
-    return $this->getDirectory();
+    return $this->getDirectory() . '\n' . $this->getProjectdir();
   }
 
   /**
@@ -259,6 +259,13 @@ abstract class Base extends Tasks {
    */
   public function getDirectory() {
     return __DIR__;
+  }
+
+  /**
+   * Get Project Directory.
+   */
+  public function getProjectdir() {
+    return getcwd();
   }
 
   /**
