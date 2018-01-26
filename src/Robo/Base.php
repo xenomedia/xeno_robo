@@ -136,6 +136,13 @@ abstract class Base extends Tasks {
   }
 
   /**
+   * Access php on docker.
+   */
+  public function shellPwd() {
+    return $this->getDirectory();
+  }
+
+  /**
    * Run Behat tests.
    */
   public function test() {
@@ -245,6 +252,13 @@ abstract class Base extends Tasks {
    */
   public function getDatabaseInfo() {
     return $this->config('database');
+  }
+
+  /**
+   * Get Current Directory.
+   */
+  public function getDirectory() {
+    return getcwd();
   }
 
   /**
