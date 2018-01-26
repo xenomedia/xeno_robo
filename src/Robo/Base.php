@@ -258,7 +258,7 @@ abstract class Base extends Tasks {
    * Get Current Directory.
    */
   public function getDirectory() {
-    return getcwd();
+    return basename(__DIR__);;
   }
 
   /**
