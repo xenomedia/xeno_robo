@@ -29,7 +29,9 @@ class BaseDrupalD8 extends BaseDrupal {
       }
     }
     else {
+      $this->dbGet();
       $this->siteInit = TRUE;
+      $this->start();
     }
   }
 

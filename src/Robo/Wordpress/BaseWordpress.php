@@ -32,7 +32,9 @@ abstract class BaseWordpress extends Base {
       $this->start();
     }
     else {
+      $this->dbGet();
       $this->siteInit = TRUE;
+      $this->start();
     }
   }
 
