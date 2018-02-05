@@ -10,16 +10,6 @@ use XenoMedia\XenoRobo\Robo\Base;
 abstract class BaseWordpress extends Base {
 
   /**
-   * Perform init functionality and start docker.
-   *
-   * You should have DockerStart.scpt file in your project.
-   */
-  public function start() {
-    $this->setup();
-    parent::start();
-  }
-
-  /**
    * Perform set up tasks.
    */
   public function setup() {
