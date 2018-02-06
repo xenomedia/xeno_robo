@@ -15,21 +15,12 @@ abstract class Base extends Tasks {
   const DUMP_FILE = 'dump.sql';
 
   /**
-   * Set to TRUE if site has been inited.
-   *
-   * @var bool
-   */
-  public $siteInit = FALSE;
-
-  /**
    * Perform init functionality and start docker.
    *
    * You should have DockerStart.scpt file in your project.
    */
   public function start() {
-    if ($this->siteInit) {
-      $this->_exec('/usr/bin/osascript DockerStart.scpt ' . $this->getGruntPath());
-    }
+    $this->_exec('/usr/bin/osascript DockerStart.scpt ' . $this->getGruntPath());
   }
 
   /**
