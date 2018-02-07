@@ -42,7 +42,7 @@ class BaseDrupalD8 extends BaseDrupal {
     $create_file = TRUE;
 
     if (file_exists($this->getSiteRoot() . 'sites/default/settings.local.php')) {
-      $create_file = $this->confirm("Are you sure you want to overwrite your current setting.local.php?");
+      $create_file = $this->confirm("Are you sure you want to overwrite your current settings.local.php?");
     }
 
     if ($create_file) {
