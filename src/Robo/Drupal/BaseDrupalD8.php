@@ -21,7 +21,7 @@ class BaseDrupalD8 extends BaseDrupal {
           $this->_exec('cp ' . $this->getSiteRoot() . '.htaccess.default ' . $this->getSiteRoot() . '.htaccess');
         }
 
-        $this->_exec('cp ' . $this->getSiteRoot() . 'sites/example.settings.local.php ' . $this->getSiteRoot() . 'sites/default/settings.local.php');
+        $this->drupalCreateSettings();
         $this->npmInstall();
         $this->dbGet();
         $this->siteInit = TRUE;
@@ -32,6 +32,28 @@ class BaseDrupalD8 extends BaseDrupal {
       $this->dbGet();
       $this->siteInit = TRUE;
       $this->start();
+    }
+  }
+
+  /**
+   * Creates settings.local.php file.
+   */
+  public function drupalCreateSettings() {
+    $create_file = TRUE;
+
+    if (file_exists($this->getSiteRoot() . 'sites/default/settings.local.php')) {
+      $create_file = $this->confirm("Are you sure you want to overwrite your current setting.local.php?");
+    }
+
+    if ($create_file) {
+      // Copy the example settings file.
+      $this->_exec('cp ' . $this->getSiteRoot() . 'sites/example.settings.local.php ' . $this->getSiteRoot() . 'sites/default/settings.local.php');
+
+      $settings = file_get_contents($this->getDirectory() . '/../../files/Drupal/drupal8.settings.local.php');
+      // Remove the opening php tags.
+      $settings = str_replace('<?php', '', $settings);
+      // Append the default settings.
+      file_put_contents($this->getSiteRoot() . 'sites/default/settings.local.php', $settings, FILE_APPEND);
     }
   }
 
