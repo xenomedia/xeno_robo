@@ -9,7 +9,6 @@ use XenoMedia\XenoRobo\Robo\Base;
  */
 abstract class BaseDrupal extends Base {
 
-
   /**
    * Perform set up tasks.
    */
