@@ -25,7 +25,7 @@ class Traefik {
    *   prefix of your project you would like to handle with Traefik.
    */
   public function __construct($name) {
-    $this->name = $name;
+    $this->name = str_replace('-', '', $name);
   }
 
   /**
