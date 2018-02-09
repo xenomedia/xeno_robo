@@ -108,7 +108,7 @@ class Traefik {
    *   Returns traefik path.
    */
   private function getTraefikPath() {
-    return $_SERVER['HOME'] . '/.traefik';
+    return $_SERVER['HOME'] . '/Sites/traefik';
   }
 
   /**
