@@ -3,6 +3,7 @@
 namespace XenoMedia\XenoRobo\Robo;
 
 use Robo\Tasks as Tasks;
+use XenoMedia\XenoRobo\Docker\Traefik as Traefik;
 
 /**
  * Base class for Xeno robo commands.
@@ -201,6 +202,48 @@ abstract class Base extends Tasks {
       ->completion($this->taskGitStack()->checkout($current_branch));
 
     return $collection;
+  }
+
+  /**
+   * Updates Traefik container with current project info.
+   */
+  public function traefikUpdate() {
+    $traefik = new Traefik($this->getCurrentDirectory());
+    $traefik->update();
+  }
+
+  /**
+   * Restarts Traefik container.
+   */
+  public function traefikStop() {
+    $traefik = new Traefik($this->getCurrentDirectory());
+    $traefik->stop();
+  }
+
+  /**
+   * Restarts Traefik container.
+   */
+  public function traefikRestart() {
+    $traefik = new Traefik($this->getCurrentDirectory());
+    $traefik->restart();
+  }
+
+  /**
+   * Remove project from Traefik container.
+   */
+  public function traefikRemove() {
+    $traefik = new Traefik($this->getCurrentDirectory());
+    $traefik->remove();
+  }
+
+  /**
+   * Get the current directory of project.
+   *
+   * @return string
+   *   Directory name.
+   */
+  public function getCurrentDirectory() {
+    return exec('pwd | xargs basename');
   }
 
   /**
