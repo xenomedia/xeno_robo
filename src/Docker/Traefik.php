@@ -53,8 +53,7 @@ class Traefik {
       ];
       file_put_contents($traefikFile, Yaml::dump($traefik, 9, 2));
       exec('docker network create ' . $this->name . '_default');
-      exec('docker-compose -f ' . $traefikFile . ' --project-name traefik stop');
-      exec('docker-compose -f ' . $traefikFile . ' --project-name traefik up -d');
+      $this->restart();
     }
   }
 
