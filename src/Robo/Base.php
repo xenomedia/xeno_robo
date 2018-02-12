@@ -21,6 +21,7 @@ abstract class Base extends Tasks {
    * You should have DockerStart.scpt file in your project.
    */
   public function start() {
+    $this->traefikUpdate();
     $this->_exec('/usr/bin/osascript DockerStart.scpt ' . $this->getGruntPath());
   }
 
@@ -36,6 +37,7 @@ abstract class Base extends Tasks {
    * Halt containers and cleanup network.
    */
   public function halt() {
+    $this->traefikRemove();
     $this->_exec('docker-compose stop');
     $this->_exec('docker-sync stop');
   }
