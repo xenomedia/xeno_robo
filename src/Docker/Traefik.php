@@ -85,12 +85,19 @@ class Traefik {
         }
       }
 
+      $traefik['services']['traefik']['networks'] = array_values($traefik['services']['traefik']['networks']);
       unset($traefik['networks'][$this->name]);
 
       file_put_contents($this->getTraefikFile(), Yaml::dump($traefik, 9, 2));
     }
-
     $this->restart();
+  }
+
+  /**
+   * Remove project from Traefik docker-composer.yml.
+   */
+  public function removeNetwork() {
+    exec('docker network rm ' . $this->name . '_default');
   }
 
   /**

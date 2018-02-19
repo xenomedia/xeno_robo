@@ -39,6 +39,7 @@ abstract class Base extends Tasks {
   public function halt() {
     $this->traefikRemove();
     $this->_exec('docker-compose stop');
+    $this->traefikRemoveNetwork();
   }
 
   /**
@@ -235,6 +236,14 @@ abstract class Base extends Tasks {
   public function traefikRemove() {
     $traefik = new Traefik($this->getCurrentDirectory());
     $traefik->remove();
+  }
+
+  /**
+   * Remove project from Traefik container.
+   */
+  public function traefikRemoveNetwork() {
+    $traefik = new Traefik($this->getCurrentDirectory());
+    $traefik->removeNetwork();
   }
 
   /**
