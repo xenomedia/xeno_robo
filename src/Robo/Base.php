@@ -39,7 +39,6 @@ abstract class Base extends Tasks {
   public function halt() {
     $this->traefikRemove();
     $this->_exec('docker-compose stop');
-    $this->_exec('docker-sync stop');
     $this->traefikRemoveNetwork();
   }
 
@@ -119,7 +118,7 @@ abstract class Base extends Tasks {
   public function dockerClean() {
     $name = $this->confirm("This will remove all containers and volumes. Are you sure?");
     if ($name) {
-      $this->_exec('docker-sync-stack clean');
+      $this->_exec('docker-compose rm -f');
     }
   }
 

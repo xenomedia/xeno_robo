@@ -90,6 +90,8 @@ class Traefik {
 
       file_put_contents($this->getTraefikFile(), Yaml::dump($traefik, 9, 2));
     }
+
+    $this->restart();
   }
 
   /**
