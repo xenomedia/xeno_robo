@@ -45,12 +45,7 @@ abstract class Base extends Tasks {
    */
   public function halt() {
     $this->traefikRemove();
-    if (file_exists('docker-compose-dev.yml')) {
-      $this->_exec('docker-compose -f docker-compose.yml -f docker-compose-dev.yml stop');
-    }
-    else {
-      $this->_exec('docker-compose stop');
-    }
+    $this->_exec('docker-compose stop');
     $this->traefikRemoveNetwork();
   }
 
@@ -128,12 +123,7 @@ abstract class Base extends Tasks {
    * Runs docker compose command.
    */
   public function dockerCompose() {
-    if (file_exists('docker-compose-dev.yml')) {
-      $this->_exec('docker-compose -f docker-compose.yml -f docker-compose-dev.yml up');
-    }
-    else {
-      $this->_exec('docker-compose up');
-    }
+    $this->_exec('docker-compose up');
   }
 
   /**
