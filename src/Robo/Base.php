@@ -22,7 +22,16 @@ abstract class Base extends Tasks {
    */
   public function start() {
     $this->traefikUpdate();
-    $this->_exec('/usr/bin/osascript DockerStart.scpt ' . $this->getGruntPath());
+
+    $pathToDockerStart = $this->getDirectory() . '/../../files/Docker/';
+    // If there is a DockerStart file locally use the one that is local.
+    if (file_exists('DockerStart.scpt')) {
+      $this->_exec('/usr/bin/osascript DockerStart.scpt ' . $this->getGruntPath());
+    }
+    else {
+      $this->_exec('/usr/bin/osascript ' . $this->getDirectory() . '/../../files/Docker/DockerStart.scpt ' . $this->getProjectdir() . ' ' . $this->getGruntPath());
+    }
+
   }
 
   /**
@@ -110,6 +119,13 @@ abstract class Base extends Tasks {
    */
   public function composerInstall() {
     $this->taskComposerInstall()->run();
+  }
+
+  /**
+   * Runs docker compose command.
+   */
+  public function dockerCompose() {
+    $this->_exec('docker-compose up');
   }
 
   /**
