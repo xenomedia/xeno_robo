@@ -26,10 +26,12 @@ abstract class Base extends Tasks {
     $pathToDockerStart = $this->getDirectory() . '/../../files/Docker/';
     // If there is a DockerStart file locally use the one that is local.
     if (file_exists('DockerStart.scpt')) {
-      $pathToDockerStart = '';
+      $this->_exec('/usr/bin/osascript DockerStart.scpt ' . $this->getGruntPath());
+    }
+    else {
+      $this->_exec('/usr/bin/osascript ' . $this->getDirectory() . '/../../files/Docker/DockerStart.scpt ' . $this->getProjectdir() . ' ' . $this->getGruntPath());
     }
 
-    $this->_exec('/usr/bin/osascript ' . $pathToDockerStart . 'DockerStart.scpt ' . $this->getProjectdir() . ' ' . $this->getGruntPath());
   }
 
   /**
