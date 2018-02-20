@@ -23,7 +23,6 @@ abstract class Base extends Tasks {
   public function start() {
     $this->traefikUpdate();
 
-    $pathToDockerStart = $this->getDirectory() . '/../../files/Docker/';
     // If there is a DockerStart file locally use the one that is local.
     if (file_exists('DockerStart.scpt')) {
       $this->_exec('/usr/bin/osascript DockerStart.scpt ' . $this->getGruntPath());
