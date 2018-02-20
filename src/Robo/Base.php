@@ -31,7 +31,6 @@ abstract class Base extends Tasks {
     else {
       $this->_exec('/usr/bin/osascript ' . $this->getDirectory() . '/../../files/Docker/DockerStart.scpt ' . $this->getProjectdir() . ' ' . $this->getGruntPath());
     }
-
   }
 
   /**
@@ -47,7 +46,12 @@ abstract class Base extends Tasks {
    */
   public function halt() {
     $this->traefikRemove();
-    $this->_exec('docker-compose stop');
+    if (file_exists('docker-compose-dev.yml')) {
+      $this->_exec('docker-compose -f docker-compose.yml -f docker-compose-dev.yml stop');
+    }
+    else {
+      $this->_exec('docker-compose stop');
+    }
     $this->traefikRemoveNetwork();
   }
 
@@ -125,7 +129,12 @@ abstract class Base extends Tasks {
    * Runs docker compose command.
    */
   public function dockerCompose() {
-    $this->_exec('docker-compose up');
+    if (file_exists('docker-compose-dev.yml')) {
+      $this->_exec('docker-compose -f docker-compose.yml -f docker-compose-dev.yml up');
+    }
+    else {
+      $this->_exec('docker-compose up');
+    }
   }
 
   /**
