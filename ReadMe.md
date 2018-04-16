@@ -92,12 +92,13 @@ database:
 # `robo db:get` settings
 # Pull the DB from Pantheon.
 pantheon:
-  site_name: 
+  site_name:
   env:
 # Pull the DB from SSH.
 stage:
-  site_name: # The name of the *sql.gz file to get. If the file name is `example.sql.gz` then enter `example` 
+  site_name: # The name of the *sql.gz file to get. If the file name is `example.sql.gz` then enter `example`
   user: # Staging ssh user.
   host: # Staging ssh host.
+  port: # SSH port number.
   backup_location: # Path to directory where backups are stored.
 ```

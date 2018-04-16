@@ -83,7 +83,12 @@ abstract class Base extends Tasks {
     }
     // If it has Stage info get database dump from staging.
     elseif ($stage = $this->getStageInfo()) {
-      $this->_exec("scp {$stage['user']}@{$stage['host']}:{$stage['backup_location']}/{$stage['site_name']}.sql.gz mariadb-init/" . self::DUMP_FILE . ".gz");
+      $port = '22';
+      if (isset($stage['port'])) {
+        $port = $stage['port'];
+      }
+
+      $this->_exec("scp -P $port {$stage['user']}@{$stage['host']}:{$stage['backup_location']}/{$stage['site_name']}.sql.gz mariadb-init/" . self::DUMP_FILE . ".gz");
       $this->_exec('gunzip mariadb-init/' . self::DUMP_FILE . '.gz');
     }
   }
