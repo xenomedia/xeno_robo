@@ -236,6 +236,26 @@ abstract class Base extends Tasks {
   }
 
   /**
+   * Remove the current branch and checkout master.
+   *
+   * @return mixed
+   *   Value of the collection.
+   */
+  public function gitClean() {
+    $current_branch = exec('git rev-parse --abbrev-ref HEAD');
+    if ($current_branch != 'master') {
+      $collection = $this->collectionBuilder();
+      $collection->taskGitStack()
+        ->checkout('master')
+        ->pull('origin', 'master')
+        ->completion($this->taskGitStack()
+          ->exec('git branch -D ' . $current_branch));
+
+      return $collection;
+    }
+  }
+
+  /**
    * Updates Traefik container with current project info.
    */
   public function traefikUpdate() {
