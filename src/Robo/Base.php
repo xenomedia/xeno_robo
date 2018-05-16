@@ -51,7 +51,6 @@ abstract class Base extends Tasks {
     else {
       $this->_exec('docker-compose stop');
     }
-    $this->traefikRemoveNetwork();
   }
 
   /**
@@ -148,6 +147,7 @@ abstract class Base extends Tasks {
     $name = $this->confirm("This will remove all containers and volumes. Are you sure?");
     if ($name) {
       $this->_exec('docker-compose rm -f');
+      $this->traefikRemoveNetwork();
     }
   }
 
