@@ -19,6 +19,6 @@ $databases['default']['default'] = array(
  */
 $settings['hash_salt'] = 'UFr4G-R2GUxaFJrgMuaC_kKOyykBq5f4wnAxKebl1eJphw1Nz25KXr24CLNGAafxwK4_Wua9fQ';
 
-@include('settings.dev.php');
-# @include('settings.stage.php');
-# @include('settings.prod.php');
+@include 'settings.dev.php';
+// @include 'settings.stage.php';
+// @include 'settings.prod.php';
