@@ -155,7 +155,7 @@ abstract class Base extends Tasks {
    * Access php on docker.
    */
   public function shellPhp() {
-    if (getXenoVersion() == '') {
+    if ($this->getXenoVersion() == '') {
       $this->_exec('docker-compose exec --user=82 php sh');
     } else {
       $this->_exec('docker-compose exec php sh');
@@ -173,7 +173,7 @@ abstract class Base extends Tasks {
    * Run Behat tests.
    */
   public function test() {
-    if (getXenoVersion() == '') {
+    if ($this->getXenoVersion() == '') {
       $this->_exec('docker-compose exec --user=82 php sh ./vendor/bin/behat --colors --format=progress');
     } else {
       $this->_exec('docker-compose exec php sh ./vendor/bin/behat --colors --format=progress');

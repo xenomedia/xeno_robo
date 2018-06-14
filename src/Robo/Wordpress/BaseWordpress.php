@@ -32,7 +32,7 @@ abstract class BaseWordpress extends Base {
    * Find and replace live with local domain..
    */
   public function wpSearch() {
-    if (getXenoVersion() == '') {
+    if ($this->getXenoVersion() == '') {
       $this->_exec("docker-compose exec --user=82 php wp --path=/var/www/html/" . $this->getSiteRoot() . " search-replace '" . $this->getLiveDomain() . "' '" . $this->getLocalDomain() . "'  --skip-columns=guid");
       $this->_exec("docker-compose exec --user=82 php wp --path=/var/www/html/" . $this->getSiteRoot() . " cache flush");
     } else {
