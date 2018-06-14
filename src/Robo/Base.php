@@ -58,7 +58,7 @@ abstract class Base extends Tasks {
    */
   public function dbBackup() {
     $db = $this->getDatabaseInfo();
-    $this->_exec("docker-compose exec --user=82 mariadb /usr/bin/mysqldump -u {$db['user']} --password={$db['password']} {$db['database']} > mariadb-init/" . self::DUMP_FILE);
+    $this->_exec("docker-compose exec mariadb /usr/bin/mysqldump -u {$db['user']} --password={$db['password']} {$db['database']} > mariadb-init/" . self::DUMP_FILE);
   }
 
   /**
@@ -155,7 +155,11 @@ abstract class Base extends Tasks {
    * Access php on docker.
    */
   public function shellPhp() {
-    $this->_exec('docker-compose exec --user=82 php sh');
+    if (getXenoVersion() == '') {
+      $this->_exec('docker-compose exec --user=82 php sh');
+    } else {
+      $this->_exec('docker-compose exec php sh');
+    }
   }
 
   /**
@@ -169,11 +173,11 @@ abstract class Base extends Tasks {
    * Run Behat tests.
    */
   public function test() {
-    $this->taskExec('docker-compose')
-      ->args(['exec', '--user=82', 'php', './vendor/bin/behat'])
-      ->option('colors')
-      ->option('format', 'progress')
-      ->run();
+    if (getXenoVersion() == '') {
+      $this->_exec('docker-compose exec --user=82 php sh ./vendor/bin/behat --colors --format=progress');
+    } else {
+      $this->_exec('docker-compose exec php sh ./vendor/bin/behat --colors --format=progress');
+    }
   }
 
   /**
@@ -305,6 +309,12 @@ abstract class Base extends Tasks {
     return exec('pwd | xargs basename');
   }
 
+  /**
+   * Get grunt path set in config file.
+   */
+  public function getXenoVersion() {
+    return $this->config('version');
+  }
   /**
    * Get grunt path set in config file.
    */
