@@ -310,7 +310,13 @@ abstract class Base extends Tasks {
   }
 
   /**
-   * Get grunt path set in config file.
+   * Get drush cim shortcut
+   */
+  public function getCim() {
+    return $this->config('cim');
+  }
+  /**
+   * Get Docker4Drupal Version
    */
   public function getXenoVersion() {
     return $this->config('version');

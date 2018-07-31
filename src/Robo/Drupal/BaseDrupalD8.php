@@ -57,4 +57,25 @@ class BaseDrupalD8 extends BaseDrupal {
     }
   }
 
+  /**
+   * Run Drush sim after pull.
+   */
+  public function gitPull() {
+    $current_branch = exec('git rev-parse --abbrev-ref HEAD');
+    $config = ($this->getCim() == '' ? 'cim' : 'csim');
+
+    $collection = $this->collectionBuilder();
+    $collection->taskGitStack()
+      ->pull;
+    
+    $name = $this->confirm("Run Config Import?");
+    if ($name) {
+      if ($this->getXenoVersion() == '') {
+        $this->_exec('docker-compose exec --user=82 php sh /usr/local/bin/drush ' . $config . ' -y');
+      } else {
+        $this->_exec('docker-compose exec php sh /usr/local/bin/drush ' . $config . ' -y');
+      }
+    }
+  }
+
 }
