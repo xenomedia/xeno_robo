@@ -68,7 +68,6 @@ class BaseDrupalD8 extends BaseDrupal {
     $collection->taskGitStack()
       ->pull;
     
-    echo $collection;
     $name = $this->confirm("Run Config Import?");
     if ($name) {
       if ($this->getXenoVersion() == '') {
