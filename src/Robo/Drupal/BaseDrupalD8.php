@@ -66,7 +66,8 @@ class BaseDrupalD8 extends BaseDrupal {
 
     $collection = $this->collectionBuilder();
     $collection->taskGitStack()
-      ->pull();
+      ->pull()
+      ->run();
     
     $name = $this->confirm("Run Config Import?");
     if ($name) {
