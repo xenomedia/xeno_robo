@@ -40,6 +40,8 @@ class Traefik {
    * Update the Traefik container.
    */
   public function update() {
+    $solr = $this->solr;
+    echo $solr;
     // Update host wider traefik container.
     $traefikPath = $this->getTraefikPath();
     $traefikFile = $this->getTraefikFile();
@@ -61,8 +63,13 @@ class Traefik {
       ];
       file_put_contents($traefikFile, Yaml::dump($traefik, 9, 2));
       exec('docker network create ' . $this->name . '_default');
-      $this->restart();
     }
+
+    if ($solr == 'true' && !in_array($this->name, $traefik['services']['solr']['networks'])) {
+      $traefik['services']['solr']['networks'][] = $this->name;
+      file_put_contents($traefikFile, Yaml::dump($traefik, 9, 2));
+    }
+    $this->restart();
   }
 
   /**
