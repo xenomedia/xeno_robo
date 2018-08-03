@@ -18,14 +18,22 @@ class Traefik {
   protected $name;
 
   /**
+   * Is the project using Solr.
+   *
+   * @var string
+   */
+  protected $solr;
+
+  /**
    * Traefik constructor.
    *
    * @param string $name
    *   Name of the network to be created which needs to match the container
    *   prefix of your project you would like to handle with Traefik.
    */
-  public function __construct($name) {
+  public function __construct($name, $solr) {
     $this->name = str_replace('-', '', $name);
+    $this->solr = $solr;
   }
 
   /**
@@ -76,8 +84,7 @@ class Traefik {
    * Remove project from Traefik docker-composer.yml.
    */
   public function remove() {
-    $solr = $this->getSolr();
-    $this->say($solr);
+    $solr = $this->solr;
     $traefik = $this->getTraefikContents();
     if (isset($traefik['services']['traefik'])) {
 
