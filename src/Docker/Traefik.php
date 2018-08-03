@@ -76,6 +76,7 @@ class Traefik {
    * Remove project from Traefik docker-composer.yml.
    */
   public function remove() {
+    $solr = $this->getSolr();
     $traefik = $this->getTraefikContents();
     if (isset($traefik['services']['traefik'])) {
 
@@ -86,6 +87,19 @@ class Traefik {
       }
 
       $traefik['services']['traefik']['networks'] = array_values($traefik['services']['traefik']['networks']);
+      unset($traefik['networks'][$this->name]);
+
+      file_put_contents($this->getTraefikFile(), Yaml::dump($traefik, 9, 2));
+    }
+    if ($solr == 'true' && isset($traefik['services']['solr'])) {
+
+      foreach ($traefik['services']['solr']['networks'] as $key => $network) {
+        if ($network == $this->name) {
+          unset($traefik['services']['solr']['networks'][$key]);
+        }
+      }
+
+      $traefik['services']['solr']['networks'] = array_values($traefik['services']['solr']['networks']);
       unset($traefik['networks'][$this->name]);
 
       file_put_contents($this->getTraefikFile(), Yaml::dump($traefik, 9, 2));

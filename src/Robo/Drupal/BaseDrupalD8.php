@@ -58,24 +58,38 @@ class BaseDrupalD8 extends BaseDrupal {
   }
 
   /**
-   * Run Drush sim after pull.
+   * Do a git pull with option for composer install and drush cim.
    */
   public function gitPull() {
     $current_branch = exec('git rev-parse --abbrev-ref HEAD');
-    $config = ($this->getCim() == '' ? 'cim' : 'csim');
 
     $collection = $this->collectionBuilder();
     $collection->taskGitStack()
       ->pull()
       ->run();
-    
+
+    $name = $this->confirm("Run Composer Install?");
+    if ($name) {
+      $this->compoerInstall();
+    }
+
     $name = $this->confirm("Run Config Import?");
     if ($name) {
-      if ($this->getXenoVersion() == '') {
-        $this->_exec('docker-compose exec --user=82 php /usr/local/bin/drush ' . $config . ' -y');
-      } else {
-        $this->_exec('docker-compose exec php /usr/local/bin/drush ' . $config . ' -y');
-      }
+      $this->drushCim();
+    }
+  }
+
+  /**
+   * Run Drush cim after pull.
+   */
+  public function drushCim() {
+    $config = ($this->getCim() == '' ? 'cim' : $this->getCim());
+    if ($this->getXenoVersion() == '') {
+      $this->_exec('docker-compose exec --user=82 php /usr/local/bin/drush cc drush');
+      $this->_exec('docker-compose exec --user=82 php /usr/local/bin/drush ' . $config . ' -y');
+    } else {
+      $this->_exec('docker-compose exec php /usr/local/bin/drush cc drush');
+      $this->_exec('docker-compose exec php /usr/local/bin/drush ' . $config . ' -y');
     }
   }
 

@@ -125,7 +125,11 @@ abstract class Base extends Tasks {
    * Runs composer install.
    */
   public function composerInstall() {
-    $this->taskComposerInstall()->run();
+    if ($this->getXenoVersion() == '') {
+      $this->_exec('docker-compose exec --user=82 php composer install');
+    } else {
+      $this->_exec('docker-compose exec php composer install');
+    }
   }
 
   /**
@@ -313,7 +317,7 @@ abstract class Base extends Tasks {
    * Get drush cim shortcut
    */
   public function getCim() {
-    return $this->config('cim');
+    return $this->config('conf.cim');
   }
   /**
    * Get Docker4Drupal Version
