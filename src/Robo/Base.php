@@ -320,6 +320,12 @@ abstract class Base extends Tasks {
     return $this->config('conf.cim');
   }
   /**
+   * Get drush cim shortcut
+   */
+  public function getSolr() {
+    return $this->config('conf.solr');
+  }
+  /**
    * Get Docker4Drupal Version
    */
   public function getXenoVersion() {

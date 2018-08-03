@@ -77,6 +77,7 @@ class Traefik {
    */
   public function remove() {
     $solr = $this->getSolr();
+    $this->say($solr);
     $traefik = $this->getTraefikContents();
     if (isset($traefik['services']['traefik'])) {
 
