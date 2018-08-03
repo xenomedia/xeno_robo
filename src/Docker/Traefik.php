@@ -41,7 +41,6 @@ class Traefik {
    */
   public function update() {
     $solr = $this->solr;
-    echo $solr;
     // Update host wider traefik container.
     $traefikPath = $this->getTraefikPath();
     $traefikFile = $this->getTraefikFile();
@@ -92,7 +91,6 @@ class Traefik {
    */
   public function remove() {
     $solr = $this->solr;
-    echo $solr;
     $traefik = $this->getTraefikContents();
     if (isset($traefik['services']['traefik'])) {
 
