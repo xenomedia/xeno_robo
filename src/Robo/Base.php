@@ -267,7 +267,7 @@ abstract class Base extends Tasks {
    * Updates Traefik container with current project info.
    */
   public function traefikUpdate() {
-    $traefik = new Traefik($this->getCurrentDirectory());
+    $traefik = new Traefik($this->getCurrentDirectory(), $this->getSolr());
     $traefik->update();
   }
 
@@ -275,7 +275,7 @@ abstract class Base extends Tasks {
    * Restarts Traefik container.
    */
   public function traefikStop() {
-    $traefik = new Traefik($this->getCurrentDirectory());
+    $traefik = new Traefik($this->getCurrentDirectory(), $this->getSolr());
     $traefik->stop();
   }
 
@@ -283,7 +283,7 @@ abstract class Base extends Tasks {
    * Restarts Traefik container.
    */
   public function traefikRestart() {
-    $traefik = new Traefik($this->getCurrentDirectory());
+    $traefik = new Traefik($this->getCurrentDirectory(), $this->getSolr());
     $traefik->restart();
   }
 
@@ -291,7 +291,7 @@ abstract class Base extends Tasks {
    * Remove project from Traefik container.
    */
   public function traefikRemove() {
-    $traefik = new Traefik($this->getCurrentDirectory());
+    $traefik = new Traefik($this->getCurrentDirectory(), $this->getSolr());
     $traefik->remove();
   }
 
@@ -299,7 +299,7 @@ abstract class Base extends Tasks {
    * Remove project from Traefik container.
    */
   public function traefikRemoveNetwork() {
-    $traefik = new Traefik($this->getCurrentDirectory());
+    $traefik = new Traefik($this->getCurrentDirectory(), $this->getSolr());
     $traefik->removeNetwork();
   }
 
