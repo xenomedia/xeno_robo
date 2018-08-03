@@ -70,7 +70,7 @@ class BaseDrupalD8 extends BaseDrupal {
 
     $name = $this->confirm("Run Composer Install?");
     if ($name) {
-      $this->compoerInstall();
+      $this->composerInstall();
     }
 
     $name = $this->confirm("Run Config Import?");
