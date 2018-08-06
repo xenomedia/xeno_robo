@@ -14,4 +14,13 @@ abstract class BaseDrupal extends Base {
    */
   abstract public function setup();
 
+  /**
+   * Run Drush cim after pull.
+   */
+  public function dbRefresh() {
+    $this->dbGet();
+    $this->_exec('docker-compose exec --user=82 php /usr/local/bin/drush sql-drop -y');
+    $this->_exec('docker-compose exec --user=82 php /usr/local/bin/drush sql-cli < mariadb-init/dump.sql');
+  }
+
 }
