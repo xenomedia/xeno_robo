@@ -41,4 +41,18 @@ abstract class BaseWordpress extends Base {
     }
   }
 
+  /**
+   * Pull DB Backup and refresh.
+   */
+  public function dbRefresh() {
+    $this->dbGet();
+    if ($this->getXenoVersion() == '') {
+      $this->_exec('docker-compose exec --user=82 php sh -c "cd /var/www/html/' . $this->getSiteRoot() . ' && wp db drop --yes"');
+      $this->_exec('docker-compose exec --user=82 php sh -c "cd /var/www/html/' . $this->getSiteRoot() . ' && wp db import mariadb-init/dump.sql"');
+    } else {
+      $this->_exec('docker-compose exec php sh -c "cd /var/www/html/' . $this->getSiteRoot() . ' && wp db drop --yes"');
+      $this->_exec('docker-compose exec php sh -c "cd /var/www/html/' . $this->getSiteRoot() . ' && wp db import mariadb-init/dump.sql"');
+    }
+
+  }
 }

@@ -61,8 +61,6 @@ class BaseDrupalD8 extends BaseDrupal {
    * Do a git pull with option for composer install and drush cim.
    */
   public function gitPull() {
-    $current_branch = exec('git rev-parse --abbrev-ref HEAD');
-
     $collection = $this->collectionBuilder();
     $collection->taskGitStack()
       ->pull()

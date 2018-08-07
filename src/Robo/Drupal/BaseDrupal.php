@@ -20,11 +20,11 @@ abstract class BaseDrupal extends Base {
   public function dbRefresh() {
     $this->dbGet();
     if ($this->getXenoVersion() == '') {
-      $this->_exec('docker-compose exec --user=82 php sh -c "drush sql-drop --root=/var/www/html/web -y"');
-      $this->_exec('docker-compose exec --user=82 php sh -c "drush sql-cli < mariadb-init/dump.sql --root=/var/www/html/web"');
+      $this->_exec('docker-compose exec --user=82 php sh -c "drush sql-drop --root=/var/www/html/' . $this->getSiteRoot() . ' -y"');
+      $this->_exec('docker-compose exec --user=82 php sh -c "drush sql-cli < mariadb-init/dump.sql --root=/var/www/html/' . $this->getSiteRoot() . '"');
     } else {
-      $this->_exec('docker-compose exec php drush sql-drop --root=/var/www/html/web -y');
-      $this->_exec('docker-compose exec php sh -c "drush sql-cli < mariadb-init/dump.sql --root=/var/www/html/web"');
+      $this->_exec('docker-compose exec php drush sql-drop --root=/var/www/html/' . $this->getSiteRoot() . ' -y');
+      $this->_exec('docker-compose exec php sh -c "drush sql-cli < mariadb-init/dump.sql --root=/var/www/html/' . $this->getSiteRoot() . '"');
     }
 
   }
