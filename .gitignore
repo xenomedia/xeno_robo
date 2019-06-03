@@ -1,5 +1,18 @@
-# Ignore vendor directory.
+# Ignore vendor directory #
+# #########################
 vendor
 
-# Ignore composer.lock
+# Ignore composer.lock #
+#  #####################
 composer.lock
+
+# Ignore IDE files #
+# ##################
+.vscode
+.idea
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon
